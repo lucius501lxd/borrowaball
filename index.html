@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Equipment Borrow/Return</title>
+</head>
+<body>
+    <h1>Scan the QR Code to Continue</h1>
+    <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=https://yourwebsite.com/borrow_return.html" alt="QR Code">
+</body>
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow or Return a Ball</title>
+</head>
+<body>
+    <h1>Borrow or Return Sports Equipment</h1>
+    <form id="selectionForm">
+        <label>
+            <input type="radio" name="action" value="borrow" required>
+            Borrow a Ball
+        </label>
+        <label>
+            <input type="radio" name="action" value="return" required>
+            Return a Ball
+        </label>
+        <button type="submit">Next</button>
+    </form>
+    <script>
+        document.getElementById('selectionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const action = document.querySelector('input[name="action"]:checked').value;
+            if (action === "borrow") {
+                window.location.href = "email_borrow.html";
+            } else if (action === "return") {
+                window.location.href = "email_return.html";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+</head>
+<body>
+    <h1>Enter Your Email</h1>
+    <form id="borrowForm">
+        <input type="email" id="borrowEmail" placeholder="Enter your email" required>
+        <input type="password" id="borrowPassword" placeholder="Enter your password" required>
+        <button type="submit">Next</button>
+    </form>
+    <script>
+        const correctEmail = "correct@example.com"; // Replace with your logic
+        const correctPassword = "correctPassword"; // Replace with your logic
+
+        document.getElementById('borrowForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('borrowEmail').value;
+            const password = document.getElementById('borrowPassword').value;
+
+            if (email === correctEmail && password === correctPassword) {
+                window.location.href = "borrow_time.html";
+            } else {
+                alert("Email or password incorrect. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Borrowing Time</title>
+</head>
+<body>
+    <h1>Select Borrowing Time</h1>
+    <form id="timeForm">
+        <label>
+            <input type="radio" name="time" value="morning" required>
+            Morning Tea
+        </label>
+        <label>
+            <input type="radio" name="time" value="lunch" required>
+            Lunch Time
+        </label>
+        <button type="submit">Confirm</button>
+    </form>
+    <script>
+        document.getElementById('timeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const time = document.querySelector('input[name="time"]:checked').value;
+
+            if (time === "morning") {
+                alert("Timer set for 11:00 AM.");
+            } else if (time === "lunch") {
+                alert("Timer set for 1:30 PM.");
+            }
+
+            // Assuming backend logic handles storing email in a borrowed list.
+            alert("You've successfully borrowed the equipment!");
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Sports Equipment</title>
+</head>
+<body>
+    <h1>Enter Your Email to Return Equipment</h1>
+    <form id="returnForm">
+        <input type="email" id="returnEmail" placeholder="Enter your email" required>
+        <button type="submit">Next</button>
+    </form>
+    <script>
+        // This list should be dynamically generated from the backend.
+        const borrowedEmails = ["correct@example.com"];
+
+        document.getElementById('returnForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('returnEmail').value;
+
+            if (borrowedEmails.includes(email)) {
+                if (confirm("Do you want to return the equipment?")) {
+                    // Remove email from the borrowed list on the backend.
+                    alert("Thank you for returning the equipment!");
+                    window.location.href = "index.html";
+                }
+            } else {
+                alert("Email does not match. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unreturned Equipment List</title>
+</head>
+<body>
+    <h1>List of Unreturned Equipment</h1>
+    <ul id="unreturnedList">
+        <!-- This list should be dynamically populated from the backend -->
+        <li>correct@example.com</li>
+        <!-- More emails here -->
+    </ul>
+</body>
+</html>
